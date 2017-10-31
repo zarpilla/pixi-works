@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>One Year in Africa</title>
+  <link href="https://fonts.googleapis.com/css?family=Gochi+Hand" rel="stylesheet"> 
+  <style>
+      body{padding: 0;margin:0;overflow: hidden}
+  </style>
+</head>
+<body>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.0.0/pixi.min.js"></script>   -->
+    <script src="./node_modules/pixi.js/dist/pixi.min.js"></script>  
+  <script>
+
+
+var currentFrame = 0;
+var maxFrame = 16;
+
+var app = new PIXI.Application(window.innerWidth, window.innerHeight,{});
+document.body.appendChild(app.view);
+
+
+// **************************************
+// BACKGROUND 
+// **************************************
+
+// create a texture from an image path
+var textureBg = PIXI.Texture.fromImage('resources/comic01/fonditoverde2.jpg');
+
+/* create a tiling sprite ...
+ * requires a texture, a width and a height
+ * in WebGL the image size should preferably be a power of two
+ */
+var tilingSprite = new PIXI.extras.TilingSprite(
+    textureBg, 
+    app.renderer.width,
+    app.renderer.height
+);
+app.stage.addChild(tilingSprite);
+
+requestAnimationFrame(update);
+
+
+// **************************************
+// TITLE 
+// **************************************
+
+var style = new PIXI.TextStyle({
+    fontFamily: 'Gochi Hand',
+    fontSize: 46,
+    //fontStyle: 'italic',
+    //fontWeight: 'bold',
+    fill: ['#222222'], // gradient
+    //stroke: '#4a1850',
+    // strokeThickness: 5,
+    // dropShadow: true,
+    // dropShadowColor: '#000000',
+    // dropShadowBlur: 4,
+    // dropShadowAngle: Math.PI / 6,
+    // dropShadowDistance: 6,
+    // wordWrap: true,
+    // wordWrapWidth: 440
+});
+
+var richText = new PIXI.Text('ONE YEAR IN AFRICA (MAPUTO, MOZ)', style);
+// richText.x = 30;
+// richText.y = 180;
+
+richText.x = window.innerWidth / 2 - ( richText.width / 2);
+richText.y = window.innerHeight / 2 - ( richText.height / 2);
+
+app.stage.addChild(richText);
+
+
+window.setTimeout(function() {
+        // do something interesting
+        fade(richText, 'out');
+
+        showComic('01');
+    }, 2000 /* but after 2000 ms */);
+
+
+
+var assetsToLoad = ['resources/comic01/00.png'];
+
+// create a new loader
+//PIXI.loader.add(assetsToLoad[0]).load(onAssetsLoaded);
+PIXI.loader.add(assetsToLoad[0]);
+
+function onAssetsLoaded(){
+}
+
+// var sprite;
+
+// function onAssetsLoaded()
+// {
+//      var texture = PIXI.Texture.fromImage(assetsToLoad[0]);
+//      var sprite = new PIXI.Sprite(texture); 
+//     // // this will log the correct width and height as the image was preloaded into the pixi.js cache
+//     // console.log(stone.width + ', ' + stone.height);
+
+//     var scale = 1.4;
+//     sprite.position.x = window.innerWidth / 2 - ( texture.width * scale / 2);
+//     sprite.position.y = window.innerHeight / 2 - ( texture.height * scale / 2);
+//     sprite.alpha = 1;
+    
+//     sprite.scale.x = scale;
+//     sprite.scale.y = scale;
+//     app.stage.addChild(sprite);
+
+//     window.setTimeout(function() {
+//         // do something interesting
+//         fade(sprite, 'out');
+
+//         showComic('01');
+//     }, 2000 /* but after 2000 ms */);
+// }
+
+function requestAnimationFrameWithParameters (callback) {
+    callback (arguments[1], arguments[2]);
+}
+
+function fade(sprite, action) {
+    //console.log('fade', sprite, action);
+    if (action == 'in') {    
+        if (sprite.alpha < 1) {
+            sprite.alpha = sprite.alpha + 0.01;
+            requestAnimationFrameWithParameters(fade, sprite, action);
+        }
+    }
+    if (action == 'out') {    
+        if (sprite.alpha > 0) {
+            sprite.alpha = sprite.alpha - 0.01;
+            requestAnimationFrameWithParameters(fade, sprite, action);
+        }
+    }
+}
+
+
+
+function showComic(num) {
+
+    currentFrame = parseInt(num);
+    assetsToLoad.push('resources/comic01/' + num + '.png');
+
+    PIXI.loader.add(assetsToLoad[assetsToLoad.length - 1]).load(onComicFrameLoaded);
+
+}
+
+function onComicFrameLoaded()
+{
+    var texture = PIXI.Texture.fromImage(assetsToLoad[assetsToLoad.length - 1]);
+    var sprite = new PIXI.Sprite(texture); 
+    var scale = 1.4;
+    sprite.scale.x = scale;
+    sprite.scale.y = scale;
+    sprite.position.x = window.innerWidth / 2 - ( texture.width * scale / 2);
+    sprite.position.y = window.innerHeight / 2 - ( texture.height * scale / 2);
+    sprite.alpha = 0;
+    app.stage.addChild(sprite);
+
+    fade(sprite, 'in');
+    
+    window.setTimeout(function() {
+        currentFrame++;        
+        var currentFrameTxt = currentFrame;
+        if (currentFrame < 10) {
+            currentFrameTxt = '0' + currentFrame;
+        }
+        if (currentFrame <= maxFrame) {            
+            showComic(currentFrameTxt);            
+        }
+        
+        fade(sprite, 'out');
+
+    }, 4000 /* but after 2000 ms */);
+}
+
+function update() {
+    //tilingSprite.tilePosition.x -= 0.128;
+    
+    app.renderer.render(app.stage);
+    requestAnimationFrame(update);
+}
+
+    </script>
+</body>
+</html>
