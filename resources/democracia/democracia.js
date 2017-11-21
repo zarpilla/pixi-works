@@ -1,22 +1,28 @@
 $(function() {
-    console.log( "ready!" );
+    
+    $('#llibertat').empty();
 
     var str = 'LLIBERTAT PRESES POLÍTIQUES';
+    var str = "T'ESTIMO MOOOLT AMORSITU";
+
     for (var i = 0, len = str.length; i < len; i++) {
         $('#llibertat').append('<span class="visible-false" id="lt-' + i + '">' + str[i] + '</span>');
     }
     $('#llibertat').append('<div id="nopararem" class="visible-false nopararem">#nopararem</div>');
 
-    var t = 0;
-    var intervalID = setInterval(function(){
-        //console.log("Interval reached" + t);
+    var audio = document.getElementById("audio");
+    if (audio) {
+        audio.play();
+        console.log('audio');
+    }
+    
 
+    var t = 0;
+    var intervalID = setInterval(function(){        
         if (t >= 100) {
             clearInterval(intervalID);
-            doEnd();
-            
+            doEnd();            
         }
-
         for (var i = 0, len = str.length; i < len; i++) {            
             var p = Math.floor(Math.random() * 100); // 0-99
             var el = $('#lt-' + i);            
@@ -31,7 +37,6 @@ $(function() {
     }, 250);
 
     function doEnd() {
-
         $( "#body" ).animate({
             backgroundColor: '#ffffff'
           }, 2000, function() {
@@ -39,7 +44,5 @@ $(function() {
             $('#nopararem').removeClass('visible-false');
             $('#llibertat').addClass('llibertat-border');
           });
-
-    }
-    
+    }    
 });

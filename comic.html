@@ -7,6 +7,16 @@
   <style>
       body{padding: 0;margin:0;overflow: hidden}
   </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77532355-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77532355-1');
+</script> -->
+
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.0/pixi.min.js"></script>  
@@ -178,8 +188,9 @@ function onComicFrameLoaded()
 }
 
 function update() {
-    //tilingSprite.tilePosition.x -= 0.128;
-    
+    //tilingSprite.tilePosition.x += ( Math.random() - 0.5 ) * 10;
+    //tilingSprite.tilePosition.y += ( Math.random() - 0.5 ) * 10;
+
     app.renderer.render(app.stage);
     requestAnimationFrame(update);
 }

@@ -13,56 +13,28 @@
   src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"
   integrity="sha256-H28SdxWrZ387Ldn0qogCzFiUDDxfPiNIyJX7BECQkDE="
   crossorigin="anonymous"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77532355-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-77532355-1');
+</script> -->
+
 </head>
-<body id="body">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.0/pixi.min.js"></script>      
-    <script>
-var app = new PIXI.Application(window.innerWidth, window.innerHeight,{backgroundColor: 0xFF00FF});
-
-document.body.appendChild(app.view);
-
-
-var style = new PIXI.TextStyle({
-    align: 'center',
-    fontFamily: 'Stencilia-A',
-    fontSize: 100,
-    //fontStyle: 'italic',
-    fontWeight: 'bold',
-    fill: ['#221F20'], // gradient
-    //stroke: '#4a1850',
-    // strokeThickness: 5,
-    // dropShadow: true,
-    // dropShadowColor: '#000000',
-    // dropShadowBlur: 4,
-    // dropShadowAngle: Math.PI / 6,
-    // dropShadowDistance: 6,
-    // wordWrap: true,
-    // wordWrapWidth: 440
-    wordWrap: true,
-    wordWrapWidth: (window.innerWidth / 3)
-});
-
-var richText = new PIXI.Text('LLIBERTAT PRESES POLÍTIQUES', style);
-
-// move the sprite to the center of the screen
-// richText.x = app.renderer.width / 2;
-// richText.y = app.renderer.height / 2;
-richText.x = window.innerWidth / 2 - ( richText.width / 2);
-richText.y = window.innerHeight / 2 - ( richText.height / 2);
-
-app.stage.addChild(richText);
-
-
-    </script> -->
+<body id="body">    
 
     <div class="quadre">
         <div class="llibertat" id="llibertat">
-                <!-- LLIBERTAT<br>PRESES<br>POLÍTIQUES
-                <div class="nopararem">#nopararem</div> -->
+                LLIBERTAT<br>PRESES<br>POLÍTIQUES                
         </div>
     </div>
 
-    <script
-    src="resources/democracia/democracia.js"></script>
+    <audio id="audio">
+      <source src="resources/democracia/democracia.mp3" type="audio/mpeg">    
+    </audio> 
+    <script src="resources/democracia/democracia.js"></script>
 </body>
 </html>

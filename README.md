@@ -9,3 +9,9 @@ The comic is from [Alex Noriega](http://www.snotm.com/) released under a CC lice
 
 ## JS Effect - Democràcia - Llibertat presos polítics
 A simple Javascript & jQuery effect
+
+## Earthquake
+Some PixiJS effects
+
+## Stars
+Some PixiJS effects
